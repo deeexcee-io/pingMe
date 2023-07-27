@@ -3,7 +3,7 @@
 
 Part of prepping for my CTL (Cyber Scheme) I have been playing about more with Pivoting, Routers etc. 
 
-HTB Machine Carrier had 22 subnets exposed. I wondered how easy it would be to ping sweep all of them with bash, hence...pingMe.sh
+HTB Machine Carrier had 22 subnets exposed. I wondered how easy it would be to ping sweep all of them quickly with bash, hence.........pingMe.sh
 
 Scanned 22 Full Subnets in less than a minute. 
 
