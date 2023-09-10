@@ -36,12 +36,22 @@ ctrl_c() {
 # Set the trap to call the ctrl_c function when Ctrl+C is received
 trap ctrl_c SIGINT
 
+# Check if the current directory is not writable
+if [ ! -w . ]; then
+    printf "\n[!] tmp files need to be written and current directory is not writable\n[!] Please re-run as sudo or change current directory"
+    sleep 2
+    exit 1
+fi
 
 # Loop through the IP addresses
-for ip_address in "${ip_addresses[@]}"; do
-	printf "\n\nNow Scanning $ip_address /24 \n\n"
-	ip_rm=$(echo $ip_address | awk -F "." '{print $1"."$2"."$3}')
-	for x in {1..255};do
-		ping -c 1 $ip_rm.$x > /dev/null && printf "\n[+] $ip_rm.$x is up \n\n" &
-	done
+printf "\n[+] Scanning subnets\n"
+for y in {1..5}; do
+    # Start scanning the subnets
+    for ip_address in "${ip_addresses[@]}"; do
+        ip_rm=$(echo "$ip_address" | awk -F "." '{print $1"."$2"."$3}')
+        for x in {1..255}; do
+            ping -c 2 "$ip_rm.$x" > /dev/null && echo "[+] $ip_rm.$x is up" >> tmp.txt &
+        done
+    done
 done
+cat tmp.txt | sort -n|sort -u && rm tmp.txt
