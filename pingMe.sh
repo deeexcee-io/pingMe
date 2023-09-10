@@ -42,7 +42,6 @@ for ip_address in "${ip_addresses[@]}"; do
 	printf "\n\nNow Scanning $ip_address /24 \n\n"
 	ip_rm=$(echo $ip_address | awk -F "." '{print $1"."$2"."$3}')
 	for x in {1..255};do
-		ping -c 1 $ip_rm.$x > /dev/null && printf "\n\n***$ip_rm.$x is up**\n\n" &
-		echo -n "."
+		ping -c 1 $ip_rm.$x > /dev/null && printf "\n[+] $ip_rm.$x is up \n\n" &
 	done
 done
