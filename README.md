@@ -9,6 +9,8 @@ HTB Machine Carrier had 22 subnets exposed. I wondered how easy it would be to p
 
 It works by simply backgrounding the process and spawning new process for each invidual IP. Can cause a lot of network traffic.
 
+time below shows 2 * /24 subents being ping'd
+
 ![image](https://github.com/deeexcee-io/pingMe/assets/130473605/da5a8f21-e2b8-4524-974d-cb9fc1bfff3b)
 
 
