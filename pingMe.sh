@@ -5,7 +5,7 @@
 #CHANGE THESE WHERE NECESSARY
 ip_addresses=(
 	10.10.11.0
- 	10.10.10.0
+	10.10.10.0
 )
 
 ctrl_c() {
@@ -25,13 +25,12 @@ fi
 
 # Loop through the IP addresses
 printf "\n[+] Scanning subnets\n"
-for y in {1..5}; do
-    # Start scanning the subnets
-    for ip_address in "${ip_addresses[@]}"; do
-        ip_rm=$(echo "$ip_address" | awk -F "." '{print $1"."$2"."$3}')
-        for x in {1..255}; do
-            ping -c 2 "$ip_rm.$x" > /dev/null && echo "[+] $ip_rm.$x is up" >> tmp.txt &
-        done
-    done
+# Start scanning the subnets
+for ip_address in "${ip_addresses[@]}"; do
+	ip_rm=$(echo "$ip_address" | awk -F "." '{print $1"."$2"."$3}')
+        	for x in {1..255}; do
+            		ping -c 1 "$ip_rm.$x" > /dev/null && echo "[+] $ip_rm.$x is up" >> tmp.txt &
+        	done
+        wait
 done
 cat tmp.txt | sort -n|sort -u && rm tmp.txt
