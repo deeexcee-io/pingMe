@@ -28,7 +28,7 @@ printf "\n[+] Scanning subnets\n"
 # Start scanning the subnets
 for ip_address in "${ip_addresses[@]}"; do
 	ip_rm=$(echo "$ip_address" | awk -F "." '{print $1"."$2"."$3}')
-        	for x in {1..255}; do
+        	for x in {1..254}; do
             		ping -c 1 "$ip_rm.$x" > /dev/null && echo "[+] $ip_rm.$x is up" >> tmp.txt &
         	done
         wait
